@@ -23,18 +23,6 @@ export default class ClientsController {
         } = request.body;
         
         const createClient = container.resolve(CreateClientService);
-        const createAddress = container.resolve(CreateAddressService);
-
-        const address = await createAddress.execute({
-            cep,
-            street,
-            number,
-            neighborhood,
-            city,
-            state
-        });
-
-        console.log(address);
 
         const client = await createClient.execute({
             name,
@@ -43,9 +31,14 @@ export default class ClientsController {
             cellphone,
             blood_type,
             email,
-            address_id: address.id
+            cep,
+            street,
+            number,
+            neighborhood,
+            city,
+            state
         });
 
-        return response.json({ client, address });
+        return response.json(client);
     }
 }
