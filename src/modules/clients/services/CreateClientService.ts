@@ -11,7 +11,7 @@ class CreateClientService {
         private clientsRepository: IClientsRepository
     ){}
 
-    public async execute({ name, cpf, phone, cellphone, blood_type, email }: ICreateClientDTO): Promise<Client> {
+    public async execute({ name, cpf, phone, cellphone, blood_type, email, address_id }: ICreateClientDTO): Promise<Client> {
         const checkClientExists = await this.clientsRepository.findByCpf(cpf);
 
         if (checkClientExists) {
@@ -25,6 +25,7 @@ class CreateClientService {
             cellphone,
             blood_type,
             email,
+            address_id
         });
 
         return client;

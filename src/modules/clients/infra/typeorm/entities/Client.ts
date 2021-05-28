@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import Address from '@modules/addresses/infra/typeorm/entities/Address';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity('clients')
 class Client {
@@ -22,6 +23,13 @@ class Client {
 
     @Column()
     blood_type: string;
+
+    @Column()
+    address_id: string;
+
+    @ManyToOne(() => Address, address => address.id)
+    @JoinColumn({ name: 'address_id' })
+    address: Address;
 
     @CreateDateColumn()
     created_at: Date;

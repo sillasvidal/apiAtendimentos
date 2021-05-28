@@ -5,4 +5,5 @@ export default interface ICreateClientDTO {
     cellphone: string;
     email: string;
     blood_type: string;
+    address_id: string;
 }
