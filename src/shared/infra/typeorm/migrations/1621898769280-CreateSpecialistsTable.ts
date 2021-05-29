@@ -24,11 +24,11 @@ export class CreateSpecialistsTable1621898769280 implements MigrationInterface {
                     },
                     {
                         name: 'phone',
-                        type: 'integer'
+                        type: 'varchar'
                     },
                     {
                         name: 'cellphone',
-                        type: 'integer'
+                        type: 'varchar'
                     },
                     {
                         name: 'email',
