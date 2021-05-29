@@ -1,4 +1,3 @@
-import CreateAddressService from '@modules/addresses/services/CreateAddressService';
 import CreateClientService from '@modules/clients/services/CreateClientService';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
