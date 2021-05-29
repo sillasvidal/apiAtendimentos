@@ -14,6 +14,9 @@ import AddressesRepository from '@modules/addresses/infra/typeorm/repositories/A
 import SpecialistsRepository from '@modules/specialists/infra/typeorm/repositories/SpecialistsRepository';
 import ISpecialistsRepository from '@modules/specialists/repositories/ISpecialistsRepository';
 
+import IProfessionsRepository from '@modules/specialists/repositories/IProfessionsRepository';
+import ProfessionsRepository from '@modules/specialists/infra/typeorm/repositories/ProfessionsRepository';
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository
@@ -33,3 +36,8 @@ container.registerSingleton<IAddressesRepository>(
   'AddressesRepository',
   AddressesRepository
 );
+
+container.registerSingleton<IProfessionsRepository>(
+  'ProfessionsRepository',
+  ProfessionsRepository
+)

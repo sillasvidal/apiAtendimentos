@@ -1,4 +1,5 @@
 import Client from "@modules/clients/infra/typeorm/entities/Client";
+import Specialist from "@modules/specialists/infra/typeorm/entities/Specialist";
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('addresses')
@@ -26,6 +27,9 @@ class Address {
 
     @OneToMany(() => Client, client => client.address)
     clients: Client[];
+
+    @OneToMany(() => Specialist, specialist => specialist.address)
+    specialists: Specialist[];
 
     @CreateDateColumn()
     created_at: Date;

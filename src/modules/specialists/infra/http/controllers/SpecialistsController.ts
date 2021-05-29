@@ -17,7 +17,8 @@ export default class SpecialistsController {
                 neighborhood,
                 city,
                 state
-            }
+            },
+            profession_name
         } = request.body;
         
         const createSpecialist = container.resolve(CreateSpecialistService);
@@ -33,7 +34,8 @@ export default class SpecialistsController {
             number,
             neighborhood,
             city,
-            state
+            state,
+            profession_name
         });
 
         return response.json(specialist);

@@ -1,4 +1,5 @@
 import CreateClientService from '@modules/clients/services/CreateClientService';
+import ListClientsService from '@modules/clients/services/ListClientsService';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
@@ -39,5 +40,13 @@ export default class ClientsController {
         });
 
         return response.json(client);
+    }
+
+    public async listAll(request: Request, response: Response): Promise<Response> {
+        const listClients = container.resolve(ListClientsService);
+
+        const clients = await listClients.execute();
+
+        return response.json(clients);
     }
 }

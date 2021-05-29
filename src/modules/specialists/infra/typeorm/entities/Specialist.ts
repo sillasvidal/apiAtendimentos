@@ -1,5 +1,6 @@
 import Address from '@modules/addresses/infra/typeorm/entities/Address';
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import Profession from './Profession';
 
 @Entity('specialists')
 class Specialist {
@@ -30,6 +31,10 @@ class Specialist {
     @ManyToOne(() => Address, address => address.id)
     @JoinColumn({ name: 'address_id' })
     address: Address;
+
+    @ManyToOne(() => Profession, profession => profession.id)
+    @JoinColumn({ name: 'profession_id'})
+    profession: Profession;
 
     @CreateDateColumn()
     created_at: Date;

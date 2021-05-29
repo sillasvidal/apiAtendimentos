@@ -5,4 +5,5 @@ export default interface ICreateSpecialistDTO {
     cellphone: string;
     email: string;
     address_id: string;
+    profession_id: string;
 }

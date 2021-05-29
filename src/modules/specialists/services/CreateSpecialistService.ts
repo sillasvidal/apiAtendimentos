@@ -4,6 +4,8 @@ import Specialist from "../infra/typeorm/entities/Specialist";
 import ISpecialistsRepository from "../repositories/ISpecialistsRepository";
 import IAddressesRepository from "@modules/addresses/repositories/IAddressesRepository";
 import Address from "@modules/addresses/infra/typeorm/entities/Address";
+import IProfessionsRepository from "../repositories/IProfessionsRepository";
+import Profession from "../infra/typeorm/entities/Profession";
 
 interface IRequest {
     name: string;
@@ -17,11 +19,13 @@ interface IRequest {
     neighborhood: string;
     city: string;
     state: string;
+    profession_name;
 }
 
 interface IResponse {
     specialist: Specialist,
-    address: Address
+    address: Address,
+    profession: Profession
 }
 
 @injectable()
@@ -31,7 +35,10 @@ class CreateSpecialistService {
         private specialistsRepository: ISpecialistsRepository,
 
         @inject('AddressesRepository')
-        private addressesRepository: IAddressesRepository
+        private addressesRepository: IAddressesRepository,
+
+        @inject('ProfessionsRepository')
+        private professionsRepository: IProfessionsRepository
     ){}
 
     public async execute({ 
@@ -45,12 +52,19 @@ class CreateSpecialistService {
         number,
         neighborhood,
         city,
-        state  
+        state,
+        profession_name
     }: IRequest): Promise<IResponse> {
         const checkSpecialistExists = await this.specialistsRepository.findByRegister(register);
-
+        
         if (checkSpecialistExists) {
             throw new AppError('Specialist already booked with this register');
+        }
+
+        var profession = await this.professionsRepository.findByName(profession_name);
+
+        if (!profession) {
+            profession = await this.professionsRepository.create(profession_name);
         }
 
         const address = await this.addressesRepository.create({
@@ -68,10 +82,11 @@ class CreateSpecialistService {
             phone,
             cellphone,
             email,
-            address_id: address.id
+            address_id: address.id,
+            profession_id: profession.id
         });
 
-        return {specialist, address};
+        return {specialist, address, profession};
     }
 }
 
