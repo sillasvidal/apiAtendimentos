@@ -9,7 +9,7 @@ export default class AlterColumnsToSpecialists1622481118046 implements Migration
         await queryRunner.addColumn('specialists', new TableColumn({
             name: 'phone',
             type: 'varchar'
-        }));
+        })); 
         await queryRunner.addColumn('specialists', new TableColumn({
             name: 'cellphone',
             type: 'varchar'
