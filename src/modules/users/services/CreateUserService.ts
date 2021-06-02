@@ -7,7 +7,10 @@ import ICreateUserDTO from "../dtos/ICreateUserDTO";
 
 import User from "../infra/typeorm/entities/User";
 import IHashProvider from "../providers/HashProvider/models/IHashProvider";
+import { Body, Route, Tags, Post } from "tsoa";
 
+@Route('/users')
+@Tags('User')
 @injectable()
 class CreateUserService {
     constructor(
@@ -18,7 +21,8 @@ class CreateUserService {
         private hashProvider: IHashProvider
     ){}
 
-    public async execute({ name, login, password }: ICreateUserDTO): Promise<User> {
+    @Post('/')
+    public async execute( @Body() { name, login, password }: ICreateUserDTO): Promise<User> {
         const checkUserExists = await this.usersRepository.findByLogin(login);
 
         if (checkUserExists) {
