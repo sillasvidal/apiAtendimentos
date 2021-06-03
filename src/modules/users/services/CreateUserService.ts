@@ -10,7 +10,7 @@ import ICreateUserDTO from "../dtos/ICreateUserDTO";
 import User from "../infra/typeorm/entities/User";
 import IHashProvider from "../providers/HashProvider/models/IHashProvider";
 
-@Route('users')
+@Route('/users')
 @injectable()
 class CreateUserService {
     constructor(

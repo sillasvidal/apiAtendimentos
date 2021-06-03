@@ -6,6 +6,7 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
+<<<<<<< HEAD
 			"MedicalCare": {
 				"properties": {
 					"id": {
@@ -100,6 +101,8 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+=======
+>>>>>>> 980b43c51879288893c5b33722ec05c5502e6aa0
 			"User": {
 				"properties": {
 					"id": {
@@ -167,6 +170,7 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
+<<<<<<< HEAD
 		"/medicalCares": {
 			"post": {
 				"operationId": "Execute",
@@ -196,6 +200,8 @@
 				}
 			}
 		},
+=======
+>>>>>>> 980b43c51879288893c5b33722ec05c5502e6aa0
 		"/users": {
 			"post": {
 				"operationId": "Execute",
@@ -211,6 +217,12 @@
 						}
 					}
 				},
+<<<<<<< HEAD
+=======
+				"tags": [
+					"User"
+				],
+>>>>>>> 980b43c51879288893c5b33722ec05c5502e6aa0
 				"security": [],
 				"parameters": [],
 				"requestBody": {

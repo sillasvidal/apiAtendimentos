@@ -21,6 +21,7 @@ app.use(express.json());
 app.use(express.static('public'));
 
 app.use(
+<<<<<<< HEAD
   "/docs",
   swaggerUi.serve,
   swaggerUi.setup(undefined, {
@@ -31,6 +32,18 @@ app.use(
 );
   
 app.use(routes);
+=======
+  '/docs',
+  swaggerUi.serve,
+  swaggerUi.setup(undefined, {
+    swaggerOptions: {
+      url: '/swagger.json'
+    }
+  })
+)
+
+app.use(routes); 
+>>>>>>> 980b43c51879288893c5b33722ec05c5502e6aa0
   
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   if (err instanceof AppError) {
