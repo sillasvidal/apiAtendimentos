@@ -1,7 +1,7 @@
 import ICreateClientDTO from "@modules/clients/dtos/ICreateClientDTO";
 import IListClientWithFilterDTO from "@modules/clients/dtos/IListClientWithFilterDTO";
 import IClientsRepository from "@modules/clients/repositories/IClientsRepository";
-import { Repository, getRepository, Like } from "typeorm";
+import { Repository, getRepository, ILike } from "typeorm";
 import Client from "../entities/Client";
 
 class ClientsRepository implements IClientsRepository {
@@ -44,17 +44,17 @@ class ClientsRepository implements IClientsRepository {
                 var findClient = await this.ormRepository.find({
                     where: [
                         {name},
-                        {name: Like(`%${name}%`)},
-                        {name: Like(`${name}%`)},
-                        {name: Like(`%${name}`)},
+                        {name: ILike(`%${name}%`)},
+                        {name: ILike(`${name}%`)},
+                        {name: ILike(`%${name}`)},
                         {cpf},
-                        {cpf: Like(`%${cpf}%`)},
-                        {cpf: Like(`${cpf}%`)},
-                        {cpf: Like(`%${cpf}`)},
+                        {cpf: ILike(`%${cpf}%`)},
+                        {cpf: ILike(`${cpf}%`)},
+                        {cpf: ILike(`%${cpf}`)},
                         {email},
-                        {email: Like(`%${email}%`)},
-                        {email: Like(`${email}%`)},
-                        {email: Like(`%${email}`)},
+                        {email: ILike(`%${email}%`)},
+                        {email: ILike(`${email}%`)},
+                        {email: ILike(`%${email}`)},
                         {blood_type},
                         {created_at},
                     ],
