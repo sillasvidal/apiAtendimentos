@@ -8,5 +8,6 @@ const professionsController = new ProfessionsController();
 professionsRouter.use(ensureAuthenticated);
 
 professionsRouter.get('/', professionsController.list);
+professionsRouter.post('/', professionsController.create);
 
 export default professionsRouter;
