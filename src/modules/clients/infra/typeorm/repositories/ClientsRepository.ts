@@ -43,18 +43,9 @@ class ClientsRepository implements IClientsRepository {
             } else {
                 var findClient = await this.ormRepository.find({
                     where: [
-                        {name},
                         {name: ILike(`%${name}%`)},
-                        {name: ILike(`${name}%`)},
-                        {name: ILike(`%${name}`)},
-                        {cpf},
                         {cpf: ILike(`%${cpf}%`)},
-                        {cpf: ILike(`${cpf}%`)},
-                        {cpf: ILike(`%${cpf}`)},
-                        {email},
                         {email: ILike(`%${email}%`)},
-                        {email: ILike(`${email}%`)},
-                        {email: ILike(`%${email}`)},
                         {blood_type},
                         {created_at},
                     ],
@@ -69,6 +60,10 @@ class ClientsRepository implements IClientsRepository {
         const findClient = await this.ormRepository.findOne(id);
         
         return findClient;
+    }
+
+    async save(client: Client): Promise<Client> {
+        return this.ormRepository.save(client);
     }
 }
 
