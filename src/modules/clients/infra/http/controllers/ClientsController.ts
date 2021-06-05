@@ -60,7 +60,22 @@ export default class ClientsController {
     }
 
     public async update(request: Request, response: Response): Promise<Response> {
-        const { id, name, cpf, phone, cellphone, email, blood_type } = request.body;
+        const { 
+            id, 
+            name, 
+            cpf, 
+            phone, 
+            cellphone, 
+            email, 
+            blood_type,
+            address_id,
+            cep,
+            street,
+            number,
+            neighborhood,
+            city,
+            state
+        } = request.body;
 
         const updateClient = container.resolve(UpdateClientService);
 
@@ -72,6 +87,13 @@ export default class ClientsController {
             cellphone, 
             email, 
             blood_type,
+            address_id,
+            cep,
+            street,
+            number,
+            neighborhood,
+            city,
+            state
         });
 
         return response.json(client);
