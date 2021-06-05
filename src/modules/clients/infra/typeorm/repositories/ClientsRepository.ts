@@ -37,7 +37,9 @@ class ClientsRepository implements IClientsRepository {
             !blood_type &&
             !created_at
             ) {
-                var findClient = await this.ormRepository.find();
+                var findClient = await this.ormRepository.find({
+                    relations: ['address']
+                });
             } else {
                 var findClient = await this.ormRepository.find({
                     where: [
@@ -56,6 +58,7 @@ class ClientsRepository implements IClientsRepository {
                         {blood_type},
                         {created_at},
                     ],
+                    relations: ['address']
                 });
             }
 
