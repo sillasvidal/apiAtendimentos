@@ -1,0 +1,242 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Vitallis Documentation",
+        "description": "This is an API Vitallis",
+        "version": "1.0.0",
+        "contact": {
+            "email": "sillasv91@gmail.com"
+        }
+    },
+    "paths": {
+        "/users": {
+            "post": {
+                "tags": ["User"],
+                "summary": "Create a user",
+                "description": "Create a new users",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "login": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "John Doe",
+                                    "login": "john123",
+                                    "password": "johndoe123"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "login": {
+                                            "type": "string"
+                                        },
+                                        "password": {
+                                            "type": "string"
+                                        },
+                                        "created_at": {
+                                            "type": "timestamp"
+                                        },
+                                        "updated_at": {
+                                            "type": "timestamp"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "User already booked"
+                    }
+                }
+            } 
+        },
+        "/sessions": {
+            "post": {
+                "tags": ["Session"],
+                "summary": "Create a session",
+                "description": "Create a new session",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "login": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "login": "john123",
+                                    "password": "johndoe123"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "user": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "login": {
+                                                    "type": "string"
+                                                },
+                                                "created_at": {
+                                                    "type": "timestamp"
+                                                },
+                                                "updated_at": {
+                                                    "type": "timestamp"
+                                                }
+                                            }
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "status": "error",
+                                        "message": "Incorrect email/password combination."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/clients": {
+            "post": {
+                "tags": ["Client"],
+                "summary": "Create a client",
+                "description": "Create a new client",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "cpf": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "cellphone": {
+                                        "type": "string"
+                                    },
+                                    "blood_type": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "type": "object",
+                                        "properties": {
+                                            "cep": {
+                                                "type": "string"
+                                            },
+                                            "street": {
+                                                "type": "string"
+                                            },
+                                            "number": {
+                                                "type": "number"
+                                            },
+                                            "neighborhood": {
+                                                "type": "string"
+                                            },
+                                            "city": {
+                                                "type": "string"
+                                            },
+                                            "state": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "name":"John Doe",
+                                    "cpf": "00000000000",
+                                    "phone": "00000000000",
+                                    "cellphone": "00000000000",
+                                    "blood_type": "O+",
+                                    "email": "johndoe@example.com",
+                                    "address": {
+                                        "cep": "00000000",
+                                        "street": "example street",
+                                        "number": 123,
+                                        "neighborhood": "example neighborhood",
+                                        "city": "example city",
+                                        "state": "RS"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+
+                }
+            }
+        }
+    }
+}
