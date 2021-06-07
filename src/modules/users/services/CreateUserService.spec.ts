@@ -1,3 +1,4 @@
+import AppError from "@shared/errors/AppError";
 import FakeHashProvider from "../providers/HashProvider/fakes/FakeHashProvider";
 import FakeUsersRepository from "../repositories/fakes/FakeUsersRespository";
 import CreateUserService from "./CreateUserService"
@@ -16,12 +17,24 @@ describe("Create a user", () => {
     it("should be able to create a new user", async () => {
         const user = await createUser.execute({
             name: 'John Doe',
-            login: 'johndoe123',
+            login: 'johndoe',
             password: '123456'
         });
 
-        console.log(user);
-
         expect(user).toHaveProperty('id');
+    });
+
+    it('should not be able to create a new user with same login from another', async () => {
+        await createUser.execute({
+            name: 'John Doe',
+            login: 'johndoe',
+            password: '123456'
+        });
+
+        await expect(createUser.execute({
+            name: 'John Tre',
+            login: 'johndoe',
+            password: '123456'
+        })).rejects.toBeInstanceOf(AppError);
     });
 });
