@@ -16,51 +16,14 @@ Vitality is an application built for medical clinics to use. Its goal is to prov
 
 ## Table of contents
 
-- [Screenshots](#screenshots)
-- [Folder structure](#folder-structure)
 - [Dependencies](#dependencies)
 - [Project setup](#project-setup)
-
-## Screenshots
-
-## Folder structure
-
-```
-.
-├── public
-│   ├── index.html
-│   │
-│   ├── img
-│
-├── src
-│    ├── App.tsx
-│    ├── index.tsx
-│    ├── react-app-env.d.ts
-│    ├── routes.tsx
-│    ├── private.routes.tsx
-│    │
-│    ├── assets
-│    │   ├── GlobalStyles
-│    │       ├── index.ts
-│    │
-│    ├───components
-│    │
-│    ├───services
-│    │       api.ts
-│    │
-│    └───views
-│        └───pages
-│
-├── .gitignore
-├── tsconfig.json
-├── package.json
-└── README.md
-```
+- [Documentation api](https://desafioafya.herokuapp.com/docs)
 
 ## Dependencies
 
-- [BCrypt](https://www.npmjs.com/package/bcrypt)
-- [Celebrate](https://www.npmjs.com/package/celebrate)
+- [bcrypt](https://www.npmjs.com/package/bcrypt)
+- [celebrate](https://www.npmjs.com/package/celebrate)
 - [class-transformer](https://www.npmjs.com/package/class-transformer)
 - [cors](https://www.npmjs.com/package/cors)
 - [cross-env](https://www.npmjs.com/package/cross-env)
@@ -88,7 +51,7 @@ git clone git@github.com:jsenger/desafio-afya.git
 ### Enter frontend directory:
 
 ```
-cd frontend
+cd backend
 ```
 
 ### Install dependencies:
@@ -97,10 +60,22 @@ cd frontend
 yarn
 ```
 
+### Create database image
+
+```
+docker run --name postgres -e POSTGRES_PASSWORD=docker -e POSTGRES_DB=DesafioAfya -p 5432:5432 -d postgres
+```
+
+### Start database service
+
+```
+docker start postgres
+```
+
 ### Compile and hot-reload for development:
 
 ```
-yarn start
+yarn dev:server
 ```
 
 ### Compile and minify for production:
