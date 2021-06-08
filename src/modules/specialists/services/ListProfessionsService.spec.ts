@@ -1,79 +1,26 @@
-import FakeAddressesRepository from "@modules/addresses/repositories/fakes/FakeAddressesRepository";
-import FakeProfessionsRepository from "@modules/specialists/repositories/fakes/FakeProfessionsRepository";
-import FakeSpecialistsRepository from "../repositories/fakes/FakeSpecialistsRepository";
-import CreateSpecialistService from "./CreateSpecialistService";
-import ListSpecialistsService from "./ListSpecialistsService";
+import FakeProfessionsRepository from "../repositories/fakes/FakeProfessionsRepository";
+import ListProfessionsService from "./ListProfessionsService";
 
-let fakeSpecialistsRepository: FakeSpecialistsRepository;
-let fakeAddressesRepository: FakeAddressesRepository;
 let fakeProfessionsRepository: FakeProfessionsRepository;
-let createSpecialist: CreateSpecialistService;
-let listSpecialists: ListSpecialistsService;
+let listProfessions: ListProfessionsService;
 
-describe('List Clients', () => {
+describe('List Professions', () => {
     beforeEach(() => {
-        fakeSpecialistsRepository = new FakeSpecialistsRepository();
-        fakeAddressesRepository = new FakeAddressesRepository();
         fakeProfessionsRepository = new FakeProfessionsRepository();
-
-        createSpecialist = new CreateSpecialistService(fakeSpecialistsRepository, fakeAddressesRepository, fakeProfessionsRepository);
-        listSpecialists = new ListSpecialistsService(fakeSpecialistsRepository);
+        listProfessions = new ListProfessionsService(fakeProfessionsRepository);
     });
 
-    it('should be able to list specialists', async () => {
-        const specialist1 = await createSpecialist.execute({
-            name: "John Doe",
-            register: "00000000001",
-            phone: "00000000000",
-            cellphone: "00000000000",
-            email: "johndoe@example.com",
-            cep: "00000000",
-            street: "example street",
-            number: 123,
-            neighborhood: "example neighborhood",
-            city: "example city",
-            state: "RS",
-            profession_name: 'Cardiologista'
-        });
+    it('should be able to list professions', async () => {
+        const profession1 = await fakeProfessionsRepository.create('Profession name 1');
+        const profession2 = await fakeProfessionsRepository.create('Profession name 2');
+        const profession3 = await fakeProfessionsRepository.create('Profession name 3');
 
-        const specialist2 = await createSpecialist.execute({
-            name: "John Doe",
-            register: "00000000002",
-            phone: "00000000000",
-            cellphone: "00000000000",
-            email: "johndoe@example.com",
-            cep: "00000000",
-            street: "example street",
-            number: 123,
-            neighborhood: "example neighborhood",
-            city: "example city",
-            state: "RS",
-            profession_name: 'Cardiologista'
-        });
+        const professions = await listProfessions.execute();
 
-        const specialist3 = await createSpecialist.execute({
-            name: "John Doe",
-            register: "00000000003",
-            phone: "00000000000",
-            cellphone: "00000000000",
-            email: "johndoe@example.com",
-            cep: "0000000",
-            street: "example street",
-            number: 123,
-            neighborhood: "example neighborhood",
-            city: "example city",
-            state: "RS",
-            profession_name: 'Cardiologista'
-        });
-
-        const specialists = await listSpecialists.execute({
-            name: 'John'
-        });
-
-        expect(specialists).toEqual([
-            specialist1.specialist,
-            specialist2.specialist,
-            specialist3.specialist
+        expect(professions).toEqual([
+            profession1,
+            profession2,
+            profession3
         ]);
     });
 });

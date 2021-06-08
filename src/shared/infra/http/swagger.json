@@ -896,6 +896,132 @@
                         }
                     }
                 }
+            },
+            "get": {
+                "tags": ["Specialist"],
+                "sumary": "List Specialists",
+                "description": "List the specialists with or without filter",
+                "responses": {
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "status": "error",
+                                        "message": ["JWT token is missing", "Invalid JWT token"]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "specialist": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string"
+                                                    },
+                                                    "register": {
+                                                        "type": "string"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "phone": {
+                                                        "type": "string"
+                                                    },
+                                                    "cellphone": {
+                                                        "type": "string"
+                                                    },
+                                                    "email": {
+                                                        "type": "string"
+                                                    },
+                                                    "professions_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "address_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "timestamp"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "timestamp"
+                                                    }
+                                                }
+                                            },
+                                            "address": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string"
+                                                    },
+                                                    "cep": {
+                                                        "type": "string"
+                                                    },
+                                                    "street": {
+                                                        "type": "string"
+                                                    },
+                                                    "number": {
+                                                        "type": "number"
+                                                    },
+                                                    "neighborhood": {
+                                                        "type": "string"
+                                                    },
+                                                    "city": {
+                                                        "type": "string"
+                                                    },
+                                                    "state": {
+                                                        "type": "string"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "timestamp"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "timestamp"
+                                                    }
+                                                }
+                                            },
+                                            "profession": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "timestamp"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "timestamp"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "/professions": {
@@ -995,7 +1121,7 @@
             },
             "get": {
                 "tags": ["Profession"],
-                "sumary": "List Professions",
+                "summary": "List Professions",
                 "description": "List the professions",
                 "responses": {
                     "401": {
