@@ -3,8 +3,12 @@ import { v4 as uuid } from 'uuid';
 import ICreateSpecialistDTO from "@modules/specialists/dtos/ICreateSpecialistDTO";
 import Specialist from "@modules/specialists/infra/typeorm/entities/Specialist";
 import ISpecialistsRepository from "../ISpecialistsRepository";
+import IListSpecialistWithFilterDTO from '@modules/specialists/dtos/IListSpecialistWithFilterDTO';
 
 class FakeSpecialistsRepository implements ISpecialistsRepository {
+    list(data?: IListSpecialistWithFilterDTO): Promise<Specialist[] | undefined> {
+        throw new Error('Method not implemented.');
+    }
     specialists: Specialist[] = [];
     
     public async create(data: ICreateSpecialistDTO): Promise<Specialist> {
