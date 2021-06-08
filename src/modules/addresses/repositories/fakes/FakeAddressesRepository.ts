@@ -18,7 +18,11 @@ class FakeAddressesRepository implements IAddressesRepository {
     }
 
     public async save(address: Address): Promise<Address> {
-        throw new Error("Method not implemented.");
+        const findIndex = this.addresses.findIndex(findAddress => findAddress.id === address.id);
+
+        this.addresses[findIndex] = address;
+
+        return this.addresses[findIndex];
     }
     
     public async findById(address_id: string): Promise<Address | undefined> {

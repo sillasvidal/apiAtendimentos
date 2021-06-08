@@ -13,7 +13,7 @@ class ListClientsService {
     ) {}
 
     @Get('/')
-    public async execute({ name, cpf, email, blood_type, created_at }: IListClientWithFilterDTO): Promise<Client[]> {
+    public async execute({ name, cpf, email, blood_type, created_at }: IListClientWithFilterDTO): Promise<Client[] | undefined> {
         const clients = await this.clientsRepository.listClients({ name, cpf, email, blood_type, created_at});
 
         return clients;
