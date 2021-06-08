@@ -20,33 +20,9 @@
     },
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   }
 }
-
-// {
-//   "compilerOptions": {
-//     "rootDir": "src",
-//     "outDir": "build",
-//     "lib": ["es5", "es6"],
-//     "target": "es5",
-//     "moduleResolution": "node",
-//     "module": "commonjs",
-//     "sourceMap": true,
-//     "resolveJsonModule": true,
-//     "esModuleInterop": true,
-//     "emitDecoratorMetadata": true,
-//     "experimentalDecorators": true,
-//     "baseUrl": "./src" /* Base directory to resolve non-absolute module names. */,
-//     "paths": {
-//       "@modules/*": ["modules/*"],
-//       "@config/*": ["config/*"],
-//       "@shared/*": ["shared/*"]
-//     }
-
-//   }
-
-// }
