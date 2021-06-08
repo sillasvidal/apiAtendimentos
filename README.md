@@ -59,14 +59,23 @@ Vitality is an application built for medical clinics to use. Its goal is to prov
 
 ## Dependencies
 
-- [Axios](https://axios-http.com/)
-- [Materia-UI](https://material-ui.com/)
-- [styled-components](https://styled-components.com/)
-- [SweetAlert2](https://sweetalert2.github.io/)
-- [React Icons](https://react-icons.github.io/react-icons/)
-- [ReactDOM](https://reactjs.org/docs/react-dom.html)
-- [react-router-dom](https://www.npmjs.com/package/react-router-dom)
-- [React-Bootstrap](https://react-bootstrap.github.io/)
+- [BCrypt](https://www.npmjs.com/package/bcrypt)
+- [Celebrate](https://www.npmjs.com/package/celebrate)
+- [class-transformer](https://www.npmjs.com/package/class-transformer)
+- [cors](https://www.npmjs.com/package/cors)
+- [cross-env](https://www.npmjs.com/package/cross-env)
+- [date-fns](https://date-fns.org/)
+- [dotenv](https://www.npmjs.com/package/dotenv)
+- [express](https://expressjs.com/pt-br/)
+- [express-async-errors](https://www.npmjs.com/package/express-async-errors)
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+- [multer](https://www.npmjs.com/package/multer)
+- [pg](https://www.npmjs.com/package/pg)
+- [reflect-metadata](https://www.npmjs.com/package/reflect-metadata)
+- [swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express)
+- [tsyringe](https://www.npmjs.com/package/tsyringe)
+- [typeorm](https://typeorm.io/#/)
+- [uuid](https://www.npmjs.com/package/uuid)
 
 ## Project setup
 
