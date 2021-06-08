@@ -9,8 +9,8 @@
 <br />
 
 ![TypeScript badge](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![NodeJS badge](https://img.shields.io/badge/Node-JS-brightgreen)
-![ExpressJS badge](https://img.shields.io/badge/Express-JS-brightgreen)
+![NodeJS badge](https://img.shields.io/badge/NodeJS-007ACC?style=for-the-badge&logo=javascript&logoColor=white)
+![ExpressJS badge](https://img.shields.io/badge/ExpressJS-007ACC?style=for-the-badge&logo=express&logoColor=white)
 
 Vitality is an application built for medical clinics to use. Its goal is to provide an environment for the clinical staff to register patients, doctors, make appointments reservations and also record their patient’s medical history.
 
