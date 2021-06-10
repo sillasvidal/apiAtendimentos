@@ -15,10 +15,21 @@ medicalCaresRouter.post(
             date: Joi.date(),
             client_id: Joi.string().uuid().required(),
             specialist_id: Joi.string().uuid().required(),
-            status: Joi.string(),
-            amount: Joi.number(),
+            status: Joi.string().required(),
+            amount: Joi.number().required,
         },
     }),
     medicalCaresController.create);
+
+medicalCaresRouter.patch(
+    '/status',
+    celebrate({
+        [Segments.BODY]: {
+            medical_care_id: Joi.string().uuid().required(),
+            status: Joi.string().required()
+        }
+    }),
+    medicalCaresController.updateStatus
+)
 
 export default medicalCaresRouter;

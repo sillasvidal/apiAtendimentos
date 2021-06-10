@@ -9,15 +9,15 @@ class MedicalCaresRepository implements IMedicalCaresRepository {
     constructor() {
         this.ormRepository = getRepository(MedicalCare);
     }
-
+    
     public async create(data: ICreateMedicalCareDTO): Promise<MedicalCare> {
         const medicalCare = this.ormRepository.create(data);
-
+        
         await this.ormRepository.save(medicalCare);
-
+        
         return medicalCare;
     }
-
+    
     public async findByDate(date: Date, specialist_id: string): Promise<MedicalCare | undefined> {
         const findMedicalCare = await this.ormRepository.findOne({
             where: {
@@ -25,8 +25,18 @@ class MedicalCaresRepository implements IMedicalCaresRepository {
                 specialist_id
             },
         });
-
+        
         return findMedicalCare;
+    }
+    
+    public async findById(id: string): Promise<MedicalCare | undefined> {
+        const findMedicalCare = await this.ormRepository.findOne(id);
+        
+        return findMedicalCare;
+    }
+    
+    public async save(medicalCare: MedicalCare): Promise<MedicalCare> {
+        return this.ormRepository.save(medicalCare);
     }
 }
 
