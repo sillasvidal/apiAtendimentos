@@ -1,7 +1,8 @@
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, ILike, Repository } from 'typeorm';
 import ICreateMedicalCareDTO from "@modules/medicalCares/dtos/ICreateMedicalCareDTO";
 import IMedicalCaresRepository from "@modules/medicalCares/repositories/IMedicalCaresRepository";
 import MedicalCare from "../entities/MedicalCare";
+import IListMedicalCaresWithFilterDTO from '@modules/medicalCares/dtos/IListMedicalCaresWithFilterDTO';
 
 class MedicalCaresRepository implements IMedicalCaresRepository {
     private ormRepository: Repository<MedicalCare>;
@@ -37,6 +38,39 @@ class MedicalCaresRepository implements IMedicalCaresRepository {
     
     public async save(medicalCare: MedicalCare): Promise<MedicalCare> {
         return this.ormRepository.save(medicalCare);
+    }
+    
+    public async list({ appointment_date, date, client_id, specialist_id, status }: IListMedicalCaresWithFilterDTO): Promise<MedicalCare[] | undefined> {
+        if(
+            !appointment_date &&
+            !date &&
+            !client_id &&
+            !specialist_id &&
+            !status
+        ){
+            var medicalCares = await this.ormRepository.find({
+                relations: ['client', 'specialist'],
+                order: {
+                    date: 'ASC'
+                }
+            });
+        } else {
+            var medicalCares = await this.ormRepository.find({
+                where: [
+                    {appointment_date},
+                    {date},
+                    {client_id},
+                    {specialist_id},
+                    {status},
+                ],
+                relations: ['client', 'specialist'],
+                order: {
+                    date: 'ASC'
+                },
+            });
+        }
+        
+        return medicalCares;
     }
 }
 

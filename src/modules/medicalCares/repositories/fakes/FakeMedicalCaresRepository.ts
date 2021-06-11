@@ -32,10 +32,14 @@ class FakeMedicalCaresRepository implements IMedicalCaresRepository {
     
     public async save(medicalCare: MedicalCare): Promise<MedicalCare> {
         const findIndex = this.medicalCares.findIndex(findMedicalCare => findMedicalCare.id = medicalCare.id);
-
+        
         this.medicalCares[findIndex] = medicalCare;
-
+        
         return this.medicalCares[findIndex];
+    }
+    
+    public async list(): Promise<MedicalCare[] | undefined> {
+        return this.medicalCares;
     }
 }
 

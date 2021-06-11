@@ -1,4 +1,5 @@
 import ICreateMedicalCareDTO from "../dtos/ICreateMedicalCareDTO";
+import IListMedicalCaresWithFilterDTO from "../dtos/IListMedicalCaresWithFilterDTO";
 import MedicalCare from "../infra/typeorm/entities/MedicalCare";
 
 export default interface IMedicalCaresRepository {
@@ -6,4 +7,5 @@ export default interface IMedicalCaresRepository {
     findByDate(date: Date, specialist_id: string): Promise<MedicalCare | undefined>;
     findById(id: string): Promise<MedicalCare | undefined>;
     save(medicalCare: MedicalCare): Promise<MedicalCare>;
+    list(data?: IListMedicalCaresWithFilterDTO):Promise<MedicalCare[] | undefined>;
 }

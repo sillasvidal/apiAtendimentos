@@ -34,4 +34,6 @@ medicalCaresRouter.patch(
 
 medicalCaresRouter.put('/', medicalCaresController.updateMedicalCare);
 
+medicalCaresRouter.get('/', medicalCaresController.list);
+
 export default medicalCaresRouter;

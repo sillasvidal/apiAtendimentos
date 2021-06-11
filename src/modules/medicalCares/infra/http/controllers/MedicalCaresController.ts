@@ -1,4 +1,5 @@
 import CreateMedicalCareAppointmentService from '@modules/medicalCares/services/CreateMedicalCareAppointmentService';
+import ListMedicalCaresService from '@modules/medicalCares/services/ListMedicalCaresService';
 import UpdateMedicalCareService from '@modules/medicalCares/services/UpdateMedicalCareService';
 import UpdateStatusMedicalCareService from '@modules/medicalCares/services/UpdateStatusMedicalCareService';
 import { Request, Response } from 'express';
@@ -64,6 +65,18 @@ class MedicalCaresController {
         });
 
         return response.json(updatedMedicalCare);
+    }
+
+    public async list(request: Request, response: Response): Promise<Response> {
+        const { appointment_date, date, client_id, specialist_id, status } = request.query;
+
+        const listMedicalCares = container.resolve(ListMedicalCaresService);
+
+        const medicalCares = await listMedicalCares.execute({
+            appointment_date, date, client_id, specialist_id, status
+        });
+
+        return response.json(medicalCares);
     }
 }
 

@@ -1,5 +1,6 @@
 import Address from '@modules/addresses/infra/typeorm/entities/Address';
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import MedicalCare from '@modules/medicalCares/infra/typeorm/entities/MedicalCare';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import Profession from './Profession';
 
 @Entity('specialists')
@@ -35,6 +36,9 @@ class Specialist {
     @ManyToOne(() => Profession, profession => profession.id)
     @JoinColumn({ name: 'profession_id'})
     profession: Profession;
+
+    @OneToMany(() => MedicalCare, medicalCare => medicalCare.specialist)
+    medicalCares: MedicalCare[];
 
     @CreateDateColumn()
     created_at: Date;
