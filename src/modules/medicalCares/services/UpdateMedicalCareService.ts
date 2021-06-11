@@ -6,34 +6,35 @@ import MedicalCare from "../infra/typeorm/entities/MedicalCare";
 import IMedicalCaresRepository from "../repositories/IMedicalCaresRepository";
 
 interface IRequest {
-    medical_care_id: string;
+    id: string;
+    date: Date;
+    amount: number;
     status: 'AGENDADO' | 'REALIZADO' | 'CANCELADO';
+    client_id: string;
+    specialist_id: string;
+    description?: string;
 }
 
 @injectable()
-class UpdateStatusMedicalCareService {
-    constructor(
+class UpdateMedicalCareService {
+    constructor (
         @inject('MedicalCaresRepository')
         private medicalCaresRepository: IMedicalCaresRepository,
 
-        @inject('MedicalRecordHistoricRepository')
-        private medicalRecordHistoricRepository: IMedicalRecordHistoricRepository,
-
         @inject('MedicalRecordsRepository')
-        private medicalRecordsRepository: IMedicalRecordsRepository
+        private medicalRecordsRepository: IMedicalRecordsRepository,
+
+        @inject('MedicalRecordHistoricRepository')
+        private medicalRecordHistoricRepository: IMedicalRecordHistoricRepository
     ) {}
 
-    public async execute({ medical_care_id, status }: IRequest): Promise<MedicalCare> {
-        if ((status !== 'AGENDADO') && (status !== 'REALIZADO') && (status !== 'CANCELADO')) {
-            throw new AppError('Invalid status name');
+    public async execute({ id, date, amount, status, client_id, specialist_id, description }: IRequest): Promise<MedicalCare> {
+        const medicalCare = await this.medicalCaresRepository.findById(id);
+
+        if(!medicalCare) {
+            throw new AppError('Medical Care not found');
         }
-        
-        const medicalCare = await this.medicalCaresRepository.findById(medical_care_id);
-        
-        if (!medicalCare) {
-            throw new AppError(`Medical Care not found`);
-        }
-        
+
         if (medicalCare.status === 'CANCELADO') {
             throw new AppError('This medical care already canceled');
         }
@@ -41,27 +42,33 @@ class UpdateStatusMedicalCareService {
         if (medicalCare.status === 'REALIZADO') {
             throw new AppError("You can't modify a medical care appointment status where already finished");
         }
-
-        medicalCare.status = status;
-
-        await this.medicalCaresRepository.save(medicalCare);
-
+        
         if (status === 'REALIZADO') {
             const medicalRecords = await this.medicalRecordsRepository.findByClientId(medicalCare.client_id);
-
+            
             if (!medicalRecords) {
                 throw new AppError('Medical Records not found');
             }
-
+            
+            if(!description) {
+                throw new AppError('Description undefined');
+            }
+            
             await this.medicalRecordHistoricRepository.create({
                 date: medicalCare.date,
                 medical_record_id: medicalRecords.id,
-                description: `Consulta médica realizada no dia ${medicalCare.date}`
+                description
             });
         }
 
-        return medicalCare;
+        medicalCare.status = status;
+        medicalCare.date = date;
+        medicalCare.amount = amount;
+        medicalCare.client_id = client_id;
+        medicalCare.specialist_id = specialist_id;
+        
+        return await this.medicalCaresRepository.save(medicalCare);
     }
 }
 
-export default UpdateStatusMedicalCareService;
+export default UpdateMedicalCareService;

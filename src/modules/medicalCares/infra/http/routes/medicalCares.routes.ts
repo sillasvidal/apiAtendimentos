@@ -16,7 +16,7 @@ medicalCaresRouter.post(
             client_id: Joi.string().uuid().required(),
             specialist_id: Joi.string().uuid().required(),
             status: Joi.string().required(),
-            amount: Joi.number().required,
+            amount: Joi.number().required(),
         },
     }),
     medicalCaresController.create);
@@ -31,5 +31,7 @@ medicalCaresRouter.patch(
     }),
     medicalCaresController.updateStatus
 )
+
+medicalCaresRouter.put('/', medicalCaresController.updateMedicalCare);
 
 export default medicalCaresRouter;

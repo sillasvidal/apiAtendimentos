@@ -1,4 +1,5 @@
 import CreateMedicalCareAppointmentService from '@modules/medicalCares/services/CreateMedicalCareAppointmentService';
+import UpdateMedicalCareService from '@modules/medicalCares/services/UpdateMedicalCareService';
 import UpdateStatusMedicalCareService from '@modules/medicalCares/services/UpdateStatusMedicalCareService';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
@@ -34,6 +35,32 @@ class MedicalCaresController {
         const updatedMedicalCare = await updateStatus.execute({
             medical_care_id,
             status
+        });
+
+        return response.json(updatedMedicalCare);
+    }
+
+    public async updateMedicalCare(request: Request, response: Response): Promise<Response> {
+        const {
+            id, 
+            date,
+            amount,
+            status,
+            client_id,
+            specialist_id,
+            description
+        } = request.body;
+
+        const updateMedicalCare = container.resolve(UpdateMedicalCareService);
+
+        const updatedMedicalCare = await updateMedicalCare.execute({
+            id,
+            date,
+            amount,
+            status,
+            client_id,
+            specialist_id,
+            description
         });
 
         return response.json(updatedMedicalCare);
