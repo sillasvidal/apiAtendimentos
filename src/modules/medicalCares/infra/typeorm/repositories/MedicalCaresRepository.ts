@@ -63,7 +63,7 @@ class MedicalCaresRepository implements IMedicalCaresRepository {
                         {specialist_id},
                         {status},
                     ],
-                    relations: ['client', 'specialist'],
+                    relations: ['client', 'specialist', 'specialist.profession'],
                     order: {
                         date: 'ASC'
                     },
