@@ -17,6 +17,7 @@ medicalCaresRouter.post(
             specialist_id: Joi.string().uuid().required(),
             status: Joi.string().required(),
             amount: Joi.number().required(),
+            description: Joi.string()
         },
     }),
     medicalCaresController.create);
