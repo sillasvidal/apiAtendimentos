@@ -33,7 +33,7 @@ class MedicalRecordsRepository implements IMedicalRecordsRepository {
             where: {
                 client_id
             },
-            relations: ['client', 'medicalRecordHistoric']
+            relations: ['client', 'medicalRecordHistoric', 'medicalRecordHistoric.specialist']
         });
 
         return medicalRecords;

@@ -57,7 +57,8 @@ class UpdateMedicalCareService {
             await this.medicalRecordHistoricRepository.create({
                 date: medicalCare.date,
                 medical_record_id: medicalRecords.id,
-                description
+                description,
+                specialist_id: medicalCare.specialist_id
             });
         }
 

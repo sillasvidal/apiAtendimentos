@@ -1,3 +1,4 @@
+import Specialist from "@modules/specialists/infra/typeorm/entities/Specialist";
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import MedicalRecords from "./MedicalRecords";
 
@@ -15,9 +16,16 @@ class MedicalRecordHistoric {
     @Column()
     medical_record_id: string;
 
+    @Column()
+    specialist_id: string;
+
     @ManyToOne(() => MedicalRecords, medicalRecords => medicalRecords.medicalRecordHistoric)
     @JoinColumn({ name: 'medical_record_id' })
     medicalRecords: MedicalRecords;
+
+    @ManyToOne(() => Specialist, specialist => specialist.medicalRecordHistoric)
+    @JoinColumn({ name: 'specialist_id' })
+    specialist: Specialist;
 
     @CreateDateColumn()
     created_at: Date;
