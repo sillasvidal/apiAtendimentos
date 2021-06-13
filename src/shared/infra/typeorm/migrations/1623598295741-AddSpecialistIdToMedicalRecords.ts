@@ -5,7 +5,7 @@ export class AddSpecialistIdToMedicalRecords1623598295741 implements MigrationIn
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.addColumn('medicalRecordHistoric', new TableColumn({
             name: 'specialist_id',
-            type: 'uuid',
+            type: 'uuid', 
             isNullable: true
         }));
 
