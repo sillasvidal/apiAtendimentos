@@ -8,10 +8,7 @@ import IMedicalCaresRepository from "../repositories/IMedicalCaresRepository";
 class ListMedicalCaresService {
     constructor(
         @inject('MedicalCaresRepository')
-        private medicalCaresRepository: IMedicalCaresRepository,
-
-        @inject('MedicalRecordsRepository')
-        private medicalRecordsRepository: IMedicalRecordsRepository
+        private medicalCaresRepository: IMedicalCaresRepository
     ){}
 
     public async execute({ appointment_date, date, client_id, specialist_id, status }: IListMedicalCaresWithFilterDTO): Promise<MedicalCare[] | undefined> {
