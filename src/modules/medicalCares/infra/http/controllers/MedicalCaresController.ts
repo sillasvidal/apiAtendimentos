@@ -12,7 +12,8 @@ class MedicalCaresController {
             amount,
             status,
             client_id,
-            specialist_id
+            specialist_id,
+            description
         } = request.body;
 
         const createMedicalCareAppointment = container.resolve(CreateMedicalCareAppointmentService);
@@ -22,7 +23,8 @@ class MedicalCaresController {
             amount,
             status,
             client_id,
-            specialist_id
+            specialist_id,
+            description
         });
 
         return response.json(medicalCareAppointment);

@@ -14,6 +14,7 @@ interface IRequest {
     status: 'AGENDADO' | 'REALIZADO' | 'CANCELADO';
     client_id: string;
     specialist_id: string; 
+    description: string;
 }
 
 @injectable()
@@ -29,7 +30,7 @@ class CreateMedicalCareAppointmentService {
         private specialistsRepository: ISpecialistsRepository
     ) {}
     
-    public async execute({ date, amount, status, client_id, specialist_id }: IRequest): Promise<MedicalCare> {
+    public async execute({ date, amount, status, client_id, specialist_id, description }: IRequest): Promise<MedicalCare> {
         const appointmentDate = startOfHour(date);
 
         if (isBefore(appointmentDate, Date.now())) {
