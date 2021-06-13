@@ -3,4 +3,5 @@ export default interface ICreateMedicalRecordHistoricDTO {
     description: string;
     medical_record_id: string;
     specialist_id: string;
+    medical_care_id: string;
 }

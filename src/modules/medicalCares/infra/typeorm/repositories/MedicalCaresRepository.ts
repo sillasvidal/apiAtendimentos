@@ -49,7 +49,7 @@ class MedicalCaresRepository implements IMedicalCaresRepository {
             !status
             ){
                 var medicalCares = await this.ormRepository.find({
-                    relations: ['client', 'specialist'],
+                    relations: ['client', 'specialist', 'specialist.profession', 'medicalRecordHistoric'],
                     order: {
                         date: 'ASC'
                     }
@@ -63,7 +63,7 @@ class MedicalCaresRepository implements IMedicalCaresRepository {
                         {specialist_id},
                         {status},
                     ],
-                    relations: ['client', 'specialist', 'specialist.profession'],
+                    relations: ['client', 'specialist', 'specialist.profession', 'medicalRecordHistoric'],
                     order: {
                         date: 'ASC'
                     },

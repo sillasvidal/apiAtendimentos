@@ -58,7 +58,8 @@ class UpdateMedicalCareService {
                 date: medicalCare.date,
                 medical_record_id: medicalRecords.id,
                 description,
-                specialist_id: medicalCare.specialist_id
+                specialist_id: medicalCare.specialist_id,
+                medical_care_id: medicalCare.id
             });
         }
 
