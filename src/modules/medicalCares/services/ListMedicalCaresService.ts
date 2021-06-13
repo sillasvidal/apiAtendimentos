@@ -11,12 +11,15 @@ class ListMedicalCaresService {
         private medicalCaresRepository: IMedicalCaresRepository
     ){}
 
-    public async execute({ appointment_date, date, client_id, specialist_id, status }: IListMedicalCaresWithFilterDTO): Promise<MedicalCare[] | undefined> {
+    public async execute({ appointment_date, date, client_id, specialist_id, status }: IListMedicalCaresWithFilterDTO): Promise<any> {
         const medicalCares = await this.medicalCaresRepository.list({
             appointment_date, date, client_id, specialist_id, status
         });
 
-        return medicalCares;
+        //@ts-ignore
+        let dateFromLasterMedicalCare = medicalCares[0].date;
+
+        return { dateFromLasterMedicalCare, medicalCares };
     }
 }
 

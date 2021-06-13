@@ -1,4 +1,4 @@
-import { isBefore, startOfHour } from 'date-fns';
+import { isBefore, startOfHour, getMinutes } from 'date-fns';
 
 import AppError from '@shared/errors/AppError';
 import ISpecialistsRepository from '@modules/specialists/repositories/ISpecialistsRepository';
@@ -31,7 +31,18 @@ class CreateMedicalCareAppointmentService {
     ) {}
     
     public async execute({ date, amount, status, client_id, specialist_id, description }: IRequest): Promise<MedicalCare> {
-        const appointmentDate = startOfHour(date);
+        // const minutes = getMinutes(date);
+
+        // if(minutes < 30) {
+            var appointmentDate = startOfHour(date);
+        // } else {
+        //     let add = 60 - minutes;
+        //     var appointmentDate = date;
+        // }
+
+
+        // console.log(date);
+        // console.log(minutes);
 
         if (isBefore(appointmentDate, Date.now())) {
             throw new AppError("You can't create an appointment on a past date");
