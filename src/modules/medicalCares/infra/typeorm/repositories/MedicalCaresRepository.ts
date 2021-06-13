@@ -47,31 +47,41 @@ class MedicalCaresRepository implements IMedicalCaresRepository {
             !client_id &&
             !specialist_id &&
             !status
-        ){
-            var medicalCares = await this.ormRepository.find({
-                relations: ['client', 'specialist'],
-                order: {
-                    date: 'ASC'
-                }
-            });
-        } else {
-            var medicalCares = await this.ormRepository.find({
-                where: [
-                    {appointment_date},
-                    {date},
-                    {client_id},
-                    {specialist_id},
-                    {status},
-                ],
-                relations: ['client', 'specialist'],
-                order: {
-                    date: 'ASC'
-                },
-            });
+            ){
+                var medicalCares = await this.ormRepository.find({
+                    relations: ['client', 'specialist'],
+                    order: {
+                        date: 'ASC'
+                    }
+                });
+            } else {
+                var medicalCares = await this.ormRepository.find({
+                    where: [
+                        {appointment_date},
+                        {date},
+                        {client_id},
+                        {specialist_id},
+                        {status},
+                    ],
+                    relations: ['client', 'specialist'],
+                    order: {
+                        date: 'ASC'
+                    },
+                });
+            }
+            
+            return medicalCares;
         }
         
-        return medicalCares;
-    }
-}
+        public async countByStatus(status: string): Promise<number> {
+            const quantity = await this.ormRepository.count({
+                where: {
+                    status
+                }
+            });
 
-export default MedicalCaresRepository;
+            return quantity;
+        }
+    }
+    
+    export default MedicalCaresRepository;

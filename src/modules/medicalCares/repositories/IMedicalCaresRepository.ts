@@ -8,4 +8,5 @@ export default interface IMedicalCaresRepository {
     findById(id: string): Promise<MedicalCare | undefined>;
     save(medicalCare: MedicalCare): Promise<MedicalCare>;
     list(data?: IListMedicalCaresWithFilterDTO):Promise<MedicalCare[] | undefined>;
+    countByStatus(status: string): Promise<number>; 
 }

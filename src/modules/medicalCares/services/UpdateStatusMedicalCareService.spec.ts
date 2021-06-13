@@ -1,6 +1,7 @@
 import FakeAddressesRepository from "@modules/addresses/repositories/fakes/FakeAddressesRepository";
 import FakeClientsRepository from "@modules/clients/repositories/fakes/FakeClientsRepository";
 import CreateClientService from "@modules/clients/services/CreateClientService";
+import FakeMedicalRecordHistoricRepository from "@modules/medicalRecords/repositories/fakes/FakeMedicalRecordHistoricRepository";
 import FakeMedicalRecordsRepository from "@modules/medicalRecords/repositories/fakes/FakeMedicalRecordsRepository";
 import FakeProfessionsRepository from "@modules/specialists/repositories/fakes/FakeProfessionsRepository";
 import FakeSpecialistsRepository from "@modules/specialists/repositories/fakes/FakeSpecialistsRepository";
@@ -14,6 +15,7 @@ let fakeMedicalCaresRepository: FakeMedicalCaresRepository;
 let fakeClientsRepository: FakeClientsRepository;
 let fakeAddressesRepository: FakeAddressesRepository;
 let fakeMedicalRecordsRepository: FakeMedicalRecordsRepository;
+let fakeMedicalRecordHistoricRepository: FakeMedicalRecordHistoricRepository;
 let fakeSpecialistsRepository: FakeSpecialistsRepository;
 let fakeProfessionsRepository: FakeProfessionsRepository;
 let createMedicalCare: CreateMedicalCareAppointmentService;
@@ -29,11 +31,12 @@ describe('Update MedicalCare Status', () => {
         fakeAddressesRepository = new FakeAddressesRepository();
         fakeProfessionsRepository = new FakeProfessionsRepository();
         fakeMedicalRecordsRepository = new FakeMedicalRecordsRepository();
+        fakeMedicalRecordHistoricRepository = new FakeMedicalRecordHistoricRepository();
 
         createMedicalCare = new CreateMedicalCareAppointmentService(fakeMedicalCaresRepository, fakeClientsRepository, fakeSpecialistsRepository);
         createClient = new CreateClientService(fakeClientsRepository, fakeAddressesRepository, fakeMedicalRecordsRepository);
         createSpecialist = new CreateSpecialistService(fakeSpecialistsRepository, fakeAddressesRepository, fakeProfessionsRepository);
-        updateStatusMedicalCare = new UpdateStatusMedicalCareService(fakeMedicalCaresRepository);
+        updateStatusMedicalCare = new UpdateStatusMedicalCareService(fakeMedicalCaresRepository, fakeMedicalRecordHistoricRepository, fakeMedicalRecordsRepository);
     });
 
     it('should be able to update a medical care status', async () => {

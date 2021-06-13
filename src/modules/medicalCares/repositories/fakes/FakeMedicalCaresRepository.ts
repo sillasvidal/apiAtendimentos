@@ -41,6 +41,12 @@ class FakeMedicalCaresRepository implements IMedicalCaresRepository {
     public async list(): Promise<MedicalCare[] | undefined> {
         return this.medicalCares;
     }
+    
+    public async countByStatus(status: string): Promise<number> {
+        const medicalCaresByStatus = this.medicalCares.find(medicalCare => medicalCare.status === status);
+
+        return 1;
+    }
 }
 
 export default FakeMedicalCaresRepository;
