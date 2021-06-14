@@ -21,8 +21,9 @@ class ListMedicalRecordsService {
         }
 
         var dateFromLasterMedicalCare = null;
-
-        if(listMedicalRecords.medicalRecordHistoric.date) {
+        
+        //@ts-ignore
+        if(listMedicalRecords.medicalRecordHistoric[0]) {
             //@ts-ignore
             const listSize = listMedicalRecords.medicalRecordHistoric.length;
             //@ts-ignore
