@@ -1,4 +1,4 @@
-import { Between, getRepository, ILike, Repository } from 'typeorm';
+import { Between, getRepository, ILike, LessThan, Like, MoreThan, Repository } from 'typeorm';
 import ICreateMedicalCareDTO from "@modules/medicalCares/dtos/ICreateMedicalCareDTO";
 import IMedicalCaresRepository from "@modules/medicalCares/repositories/IMedicalCaresRepository";
 import MedicalCare from "../entities/MedicalCare";
@@ -54,13 +54,21 @@ class MedicalCaresRepository implements IMedicalCaresRepository {
                     relations: ['client', 'specialist', 'specialist.profession', 'medicalRecordHistoric']
                 });
             } else {
+                medicalCareDate = date;
+                medicalCareAppointmentDate = appointment_date;
+                if (date) {
+                    var medicalCareDate = Between(startOfDay(date), endOfDay(date));
+                }
+                if (appointment_date) {
+                    var medicalCareAppointmentDate = Between(startOfDay(appointment_date), endOfDay(appointment_date));
+                }
                 var medicalCares = await this.ormRepository.find({
                     where: [
-                        {appointment_date},
-                        {date: Between(startOfDay(date), endOfDay(date))},
+                        {appointment_date: medicalCareAppointmentDate},
                         {client_id},
                         {specialist_id},
                         {status},
+                        {date: medicalCareDate},
                     ],
                     relations: ['client', 'specialist', 'specialist.profession', 'medicalRecordHistoric'],
                 });
