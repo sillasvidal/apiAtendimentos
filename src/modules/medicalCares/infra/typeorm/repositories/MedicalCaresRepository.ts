@@ -1,8 +1,10 @@
-import { getRepository, ILike, Repository } from 'typeorm';
+import { Between, getRepository, ILike, Repository } from 'typeorm';
 import ICreateMedicalCareDTO from "@modules/medicalCares/dtos/ICreateMedicalCareDTO";
 import IMedicalCaresRepository from "@modules/medicalCares/repositories/IMedicalCaresRepository";
 import MedicalCare from "../entities/MedicalCare";
 import IListMedicalCaresWithFilterDTO from '@modules/medicalCares/dtos/IListMedicalCaresWithFilterDTO';
+import { endOfDay, getDate, getMonth, getYear, startOfDay } from 'date-fns';
+import { getDay } from 'date-fns/esm';
 
 class MedicalCaresRepository implements IMedicalCaresRepository {
     private ormRepository: Repository<MedicalCare>;
@@ -48,16 +50,14 @@ class MedicalCaresRepository implements IMedicalCaresRepository {
             !specialist_id &&
             !status
             ){
-                //@ts-ignore
                 var medicalCares = await this.ormRepository.find({
                     relations: ['client', 'specialist', 'specialist.profession', 'medicalRecordHistoric']
                 });
             } else {
-                //@ts-ignore
                 var medicalCares = await this.ormRepository.find({
                     where: [
                         {appointment_date},
-                        {date},
+                        {date: Between(startOfDay(date), endOfDay(date))},
                         {client_id},
                         {specialist_id},
                         {status},
