@@ -20,10 +20,14 @@ class ListMedicalRecordsService {
             throw new AppError('Medical records not found');
         }
 
-        //@ts-ignore
-        const listSize = listMedicalRecords.medicalRecordHistoric.length;
-        //@ts-ignore
-        const dateFromLasterMedicalCare = listMedicalRecords.medicalRecordHistoric[listSize - 1].date
+        var dateFromLasterMedicalCare = null;
+
+        if(listMedicalRecords.medicalRecordHistoric) {
+            //@ts-ignore
+            const listSize = listMedicalRecords.medicalRecordHistoric.length;
+            //@ts-ignore
+            dateFromLasterMedicalCare = listMedicalRecords.medicalRecordHistoric[listSize - 1].date
+        }
 
         return {dateFromLasterMedicalCare, listMedicalRecords};
     }
