@@ -14,13 +14,18 @@ class ListMedicalRecordsService {
             throw new AppError('You must pass a client_id on query params');
         }
 
-        const medicalRecords = await this.medicalRecordsRepository.listMedicalRecords(client_id);
+        const listMedicalRecords = await this.medicalRecordsRepository.listMedicalRecords(client_id);
 
-        if (!medicalRecords) {
+        if (!listMedicalRecords) {
             throw new AppError('Medical records not found');
         }
 
-        return medicalRecords;
+        //@ts-ignore
+        const listSize = listMedicalRecords.medicalRecordHistoric.length;
+        //@ts-ignore
+        const dateFromLasterMedicalCare = listMedicalRecords.medicalRecordHistoric[listSize - 1].date
+
+        return {dateFromLasterMedicalCare, listMedicalRecords};
     }
 }
 

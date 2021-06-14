@@ -48,13 +48,12 @@ class MedicalCaresRepository implements IMedicalCaresRepository {
             !specialist_id &&
             !status
             ){
+                //@ts-ignore
                 var medicalCares = await this.ormRepository.find({
-                    relations: ['client', 'specialist', 'specialist.profession', 'medicalRecordHistoric'],
-                    order: {
-                        date: 'DESC'
-                    }
+                    relations: ['client', 'specialist', 'specialist.profession', 'medicalRecordHistoric']
                 });
             } else {
+                //@ts-ignore
                 var medicalCares = await this.ormRepository.find({
                     where: [
                         {appointment_date},
@@ -64,9 +63,6 @@ class MedicalCaresRepository implements IMedicalCaresRepository {
                         {status},
                     ],
                     relations: ['client', 'specialist', 'specialist.profession', 'medicalRecordHistoric'],
-                    order: {
-                        date: 'DESC'
-                    },
                 });
             }
             
