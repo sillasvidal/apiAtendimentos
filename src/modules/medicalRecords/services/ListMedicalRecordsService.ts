@@ -22,7 +22,7 @@ class ListMedicalRecordsService {
 
         var dateFromLasterMedicalCare = null;
 
-        if(listMedicalRecords.medicalRecordHistoric) {
+        if(listMedicalRecords.medicalRecordHistoric.date) {
             //@ts-ignore
             const listSize = listMedicalRecords.medicalRecordHistoric.length;
             //@ts-ignore
